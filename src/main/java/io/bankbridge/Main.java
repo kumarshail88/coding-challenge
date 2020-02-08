@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 
-@Slf4j()
+@Slf4j
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -32,7 +32,8 @@ public class Main {
 
 		port(config.getServerPort());
 
-		BanksCacheInitializer.getInstance().loadBanksCacheFromFile();
+		//Automatically initializes cache.
+		BanksCacheInitializer.getInstance();
 		BanksRemoteCalls.init();
 		
 		get(BANKS_API_URL_V1, (request, response) -> BanksCacheBased.handle(request, response));

@@ -44,6 +44,14 @@ public class ConfigurationLoader {
         return Integer.valueOf((String) config.get(CACHE_HEAP_SIZE));
     }
 
+    public String getBanksV1JsonPath(){
+        return String.valueOf(config.get(BANKS_V1_JOSN_PATH));
+    }
+
+    public String getBanksV2JsonPath(){
+        return String.valueOf(config.get(BANKS_V2_JOSN_PATH));
+    }
+
     private static class ConfigurationProvider {
         public static final ConfigurationLoader INSTANCE = new ConfigurationLoader();
     }

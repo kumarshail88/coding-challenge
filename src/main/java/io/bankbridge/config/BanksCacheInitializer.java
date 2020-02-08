@@ -2,6 +2,7 @@ package io.bankbridge.config;
 
 import io.bankbridge.model.BankModelList;
 import io.bankbridge.util.BanksApiUtil;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.ehcache.Cache;
 
@@ -22,7 +23,10 @@ import static io.bankbridge.util.BanksApiConstants.BANKS_V1_JOSN_PATH;
 @Slf4j
 public class BanksCacheInitializer {
 
-    private BanksCacheInitializer() {
+    private ConfigurationLoader config;
+
+    private BanksCacheInitializer(@NonNull ConfigurationLoader config) {
+        this.config = config;
         loadBanksCacheFromFile();
     }
 
@@ -42,16 +46,16 @@ public class BanksCacheInitializer {
     }
 
     private BankModelList readBankModelsFromFile() {
-        Optional<BankModelList> bankModelList = BanksApiUtil.readResource(BANKS_V1_JOSN_PATH, BankModelList.class);
+        Optional<BankModelList> bankModelList = BanksApiUtil.readResource(config.getBanksV1JsonPath(), BankModelList.class);
         if (bankModelList.isPresent()) {
             return bankModelList.get();
         }
-        String errorMessage = formErrorMessageWithParameters(FAILED_TO_READ_FILE.getMessage(), BANKS_V1_JOSN_PATH);
+        String errorMessage = formErrorMessageWithParameters(FAILED_TO_READ_FILE.getMessage(), config.getBanksV1JsonPath());
         log.error(errorMessage);
         throw new IllegalStateException(errorMessage);
     }
 
     private static class BanksCacheInitializerHelper {
-        public static final BanksCacheInitializer INSTANCE = new BanksCacheInitializer();
+        public static final BanksCacheInitializer INSTANCE = new BanksCacheInitializer(ConfigurationLoader.getConfiguration());
     }
 }

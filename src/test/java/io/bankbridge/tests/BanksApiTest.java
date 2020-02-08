@@ -76,7 +76,7 @@ public class BanksApiTest {
 
     @Test
     public void testWhenReadBanksDataFromFileThenSuccess() {
-        Optional<BankModelList> bankModelList = readResource(BANKS_V1_JOSN_PATH, BankModelList.class);
+        Optional<BankModelList> bankModelList = readResource(ConfigurationLoader.getConfiguration().getBanksV1JsonPath(), BankModelList.class);
         assertTrue(bankModelList.isPresent());
     }
 

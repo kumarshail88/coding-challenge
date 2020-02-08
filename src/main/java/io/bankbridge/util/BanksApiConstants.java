@@ -5,8 +5,8 @@ package io.bankbridge.util;
  */
 public class BanksApiConstants {
     public static final String APPLICATION_PROPERTIES_FILE_PATH = "application.properties";
-    public static final String BANKS_V1_JOSN_PATH = "banks-v1.json";
-    public static final String BANKS_V2_JOSN_PATH = "banks-v2.json";
+    public static final String BANKS_V1_JOSN_PATH = "banksV1JsonPath";
+    public static final String BANKS_V2_JOSN_PATH = "banksV2JsonPath";
     public static final String SERVER_PORT = "serverPort";
     public static final String CACHE_HEAP_SIZE = "cacheHeapSize";
     public static final String BANKS = "banks";
