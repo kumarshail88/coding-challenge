@@ -10,14 +10,13 @@ import java.util.Optional;
 
 import static io.bankbridge.errorcodes.ErrorCode.*;
 import static io.bankbridge.util.BanksApiConstants.BANKS;
-import static io.bankbridge.util.BanksApiConstants.BANKS_V1_JOSN_PATH;
 
 /**
  * Configuration class for cache initialization from file.
- *
+ * <p>
  * This singleton class reads the banks data from provided json file and loads into relevant cache thus
  * supports the implementation for file based cache initialization.
- *
+ * <p>
  * Data is loaded into cache as soon as an Instance is requested.
  *
  * <p>

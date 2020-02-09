@@ -7,11 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static io.bankbridge.errorcodes.ErrorCode.FAILED_TO_INITIALIZE_REMOTE_API_CONFIG;
 import static io.bankbridge.errorcodes.ErrorCode.formErrorMessageWithParameters;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * This singleton class loads the Remote Api Urls from file.

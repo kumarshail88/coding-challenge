@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * Refactoring Changes:
  * Problem 1: Model fields are public. No getters and setters.
- *
+ * <p>
  * Marked the fields as private. Using lombok.Data to generate getters and setters.
  */
 

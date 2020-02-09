@@ -6,7 +6,7 @@ package io.bankbridge.errorcodes;
  * For demonstration purpose error code for client specific errors begins with 10001.
  */
 
-public class ClientErrorCode extends ErrorCode{
+public class ClientErrorCode extends ErrorCode {
 
     public ClientErrorCode(int errorCode, String message) {
         super(errorCode, message);

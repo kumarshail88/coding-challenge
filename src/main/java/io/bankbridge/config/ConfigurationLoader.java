@@ -48,16 +48,16 @@ public class ConfigurationLoader {
         return Integer.valueOf((String) config.get(CACHE_HEAP_SIZE));
     }
 
-    public String getBanksV1JsonPath(){
+    public String getBanksV1JsonPath() {
         return String.valueOf(config.get(BANKS_V1_JOSN_PATH));
     }
 
-    public String getBanksV2JsonPath(){
+    public String getBanksV2JsonPath() {
         return String.valueOf(config.get(BANKS_V2_JOSN_PATH));
     }
 
-    public int getThreadPoolSize(){
-        return Integer.valueOf((String)config.get(THREAD_POOL_SIZE));
+    public int getThreadPoolSize() {
+        return Integer.valueOf((String) config.get(THREAD_POOL_SIZE));
     }
 
     private static class ConfigurationProvider {

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import io.bankbridge.config.BanksRemoteInitializer;
 import io.bankbridge.config.ConfigurationLoader;
 import io.bankbridge.model.BankModel;
-import io.bankbridge.util.BanksApiUtil;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import spark.Request;
@@ -18,15 +15,15 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 import static io.bankbridge.errorcodes.ClientErrorCode.FAILED_TO_RETRIEVE_DATA;
 import static io.bankbridge.errorcodes.ClientErrorCode.formErrorMessageWithParameters;
 import static io.bankbridge.errorcodes.ErrorCode.*;
 import static io.bankbridge.util.BanksApiConstants.*;
-import static io.bankbridge.util.BanksApiUtil.*;
-import static java.util.concurrent.CompletableFuture.*;
-import static java.util.stream.Collectors.*;
+import static io.bankbridge.util.BanksApiUtil.getObjectMapper;
+import static java.util.concurrent.CompletableFuture.allOf;
+import static java.util.concurrent.CompletableFuture.supplyAsync;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Refactoring Changes:
@@ -78,7 +75,7 @@ public class BanksRemoteCalls {
 
         processAllResponsesAndAddResults(futureMap, bankModelList);
 
-        if (bankModelList.isEmpty()){
+        if (bankModelList.isEmpty()) {
             String errorMessage = formErrorMessageWithParameters(FAILED_TO_RETRIEVE_DATA.getMessage(), "Banks Remote");
             log.error(errorMessage);
             throw new RuntimeException(errorMessage);
@@ -105,7 +102,7 @@ public class BanksRemoteCalls {
                 .exceptionally(t -> handleFutureException(t));
     }
 
-    private static okhttp3.Response handleFutureException(Throwable t){
+    private static okhttp3.Response handleFutureException(Throwable t) {
         String errorMessage = formErrorMessageWithParameters(FAILED_TO_COMPLETE_FUTURE.getMessage(), "BanksRemoteCalls.invokeApiAsynchronously()");
         log.error(errorMessage, t);
         return null;
