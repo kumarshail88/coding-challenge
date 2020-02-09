@@ -1,0 +1,74 @@
+Step By Step:
+
+
+1. No Junit Tests - Write test case to test existing functionality. Run Tests.
+
+2. Model fields are public. - Chang visibility of fields to private and add getters and setters. Run Tests.
+
+3. User of String and integer literals and no use of constants. string literal (api url, file paths, id, name, banks) -> replace with constants. Run Tests.
+
+4. No logger api -  Add slf4j dependency in pom for logging. Run Tests
+
+5. new ObjectMapper instance is created every time when reading data from file. - 
+		a. Create new class BanksApiUtil with readResource method having no impl.  Write test case to read data from file. - Run Tests - One Test Failed.
+		b. Implement method readResource and move object mapper reading code.
+		c. Refactor file reading code in BanksCacheBased class in order to use BanksApiUtil.readResource(). Run Tests.
+		
+6. integer literals Port number and pool size are hard coded. They must be in configuration file. - 
+		a. Create a new application.properties JSON and add serverPort and cacheHeapSize fields.
+		a. Write new class ConfigurationLoader with empty method loadConfiguration(). 
+		b. Add new test case for loadConfiguration method. Run Tests
+		c. Implement loadConfiguration() method to read from application.properties file. Run Tests.
+		d. Refactor code using port number (in Main class) and pool size (In BanksCacheBased). Run Tests.
+		
+7. No error codes present - > a. Create a new class ErrorCode with method formErrorMessageWithParameters() and required fields - code and message.
+							  b. Add new test for formErrorMessageWithParameters(). Run Tests - Test Failed.
+							  c. Implement method formErrorMessageWithParameters() to return formatted string. Run Tests.
+		
+
+8. Instantiation and initialization of cache is in same class  - BanksCacheBased with business logic for API call. Violation of SRP. 
+		a. Write an empty class CacheProvider implementing a public method getCacheFor() returns Cache instnace.
+		b. Add new test to get a new cache instance with required types. Run Test. Test fails.
+		c. Implement method getCacheFor(). Run Tests.
+		d. Refactor methods BanksCacheBased.init() and handle() to use CacheProvider instead of CacheManager. Run Tests
+		
+		e. Add new class BanksCacheInitializer with empty method - loadBanksCacheFromFile()
+		f. Add new Test to verify if cache is loaded with data successfully. Test Passed as BanksCacheBased.init() method initializes cache with data.
+		g. Now comment BanksCacheBased.init() code before test and Run Tests again. - Test Failed
+		f  Move BanksCacheBased.init() code to BanksCacheInitializer.loadBanksCacheFromFile() and call BanksCacheInitializer.loadBanksCacheFromFile() from BanksCacheBased.init(). Run Tests.
+		g. Remove BanksCacheBased.init() method completely and add BanksCacheInitializer.loadBanksCacheFromFile() to Main class. Run Tests.
+	
+9. Every time BanksCacheBased.handle is invoked new ObjectMapper is created.
+		Replace new ObjectMapper with BanksApiUtil.getObjectMapper() . Run Tests
+		
+10.	No use of Streams.
+		refactor the forEach labmda to stream code. Run Tests
+		refactor response message formatting from handle method to a new method prepareAndSendResponse(). - Run Tests
+		
+11. No centralized exception handling for clients. -> 
+		a. Create a new Class ExceptionHandler and implement handle(RuntimeException e, Request req, Response res)
+		b. In Main method write lambda to invoke ExceptionHandler.handle method. - Manually Tested.
+		c. handle exceptions and set appropriate HttpStatus Code in BanksCacheBased.handle() method.
+		
+12 Implementation of /v2/banks/all endpoint
+		a. Add new test for successful response validating required data.
+		b. Add new test case  - Succesful response is returned if at lease one of the remote services is up and returns the data. 
+		c. Add new test case - if all remote services are down then no api returns failure response.
+		
+		d. Do minimal code (asynchronous implementation) so that above test cases pass. Run Tests.
+		
+13. Refactor BanksRemoteCalls -> Remove System.out.print statement from BanksRemoteCalls.handle method.
+	Refactor init method logic to different class BanksRemoteInitializer - method loadRemoteApiUrlsFromFile 
+	Add test case to read data properly from file
+	Implement BanksRemoteInitializer.loadRemoteApiUrlsFromFile() Run Tests.
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -16,4 +16,6 @@ public class BanksApiConstants {
     public static final String NAME = "name";
     public static final String THREAD_POOL_SIZE = "threadPoolSize";
     public static final int REMOTE_SERVER_PORT_NUMER = 1234;
+    public static final String LOCALHOST_URL = "http://localhost:";
+
 }
