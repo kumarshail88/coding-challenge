@@ -14,8 +14,12 @@ import static io.bankbridge.util.BanksApiConstants.BANKS_V1_JOSN_PATH;
 
 /**
  * Configuration class for cache initialization from file.
+ *
  * This singleton class reads the banks data from provided json file and loads into relevant cache thus
  * supports the implementation for file based cache initialization.
+ *
+ * Data is loaded into cache as soon as an Instance is requested.
+ *
  * <p>
  * Although implemented instance method is not thread safe, the singleton nature of the class is.
  */
@@ -30,6 +34,7 @@ public class BanksCacheInitializer {
         loadBanksCacheFromFile();
     }
 
+    //An instance of BanksCacheInitializer is useful only when it fully initialized.
     public static BanksCacheInitializer getInstance() {
         return BanksCacheInitializerHelper.INSTANCE;
     }

@@ -57,8 +57,8 @@ public class BanksCacheBased {
         return resultAsString;
     }
 
-    private static Map<String, String> toMap(Cache.Entry entry) {
-        Map map = new HashMap<>();
+    private static Map<String, String> toMap(Cache.Entry<String, String> entry) {
+        Map<String, String> map = new HashMap<>();
         map.put(ID, entry.getKey());
         map.put(NAME, entry.getValue());
         return map;

@@ -1,6 +1,9 @@
 package io.bankbridge.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Refactoring Changes:
@@ -10,6 +13,9 @@ import lombok.Data;
  */
 
 @Data
+@Builder
+@NoArgsConstructor  //Used by Object Mapper
+@AllArgsConstructor //Used by Lombok Builder.
 public class BankModel {
 
     private String bic;

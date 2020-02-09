@@ -14,8 +14,8 @@ public class ClientErrorCode extends ErrorCode{
 
     public static String formErrorMessageWithParameters(String msg, Object... params) {
         String result = ErrorCode.formErrorMessageWithParameters(msg, params);
-        return "\"{\"Error Message\": " + result + "\"}\"";
+        return result;
     }
 
-    public static final ClientErrorCode FAILED_TO_RETRIEVE_DATA = new ClientErrorCode(10001, "Failed to retrieve data from requested source : {}");
+    public static final ClientErrorCode FAILED_TO_RETRIEVE_DATA = new ClientErrorCode(10001, "Failed to retrieve data from requested source - {}");
 }

@@ -35,4 +35,10 @@ public class ErrorCode {
     public static final ErrorCode FAILED_TO_INSTANTIATE_OR_RETRIEVE_CACHE = new ErrorCode(102, "Failed to instantiate new cache or retrieve existing cache for alias: {}, keyType: {}, valueType: {}");
     public static final ErrorCode FAILED_TO_INITIALIZE_CACHE = new ErrorCode(103, "Failed to initialize cache: {} with data.");
     public static final ErrorCode FAILED_TO_READ_FILE = new ErrorCode(104, "Failed to read file: {}");
+    public static final ErrorCode FAILED_TO_INITIALIZE_REMOTE_API_CONFIG = new ErrorCode(105, "Failed to initialize remote api url config from file : {}.");
+    public static final ErrorCode REMOTE_API_INVOCATION_FAILED = new ErrorCode(106, "Remote Api invocation failed for url: {}");
+    public static final ErrorCode NO_REMOTE_API_SERVICE_AVAILABLE = new ErrorCode(107, "No remote api configuration available to retrieve data.");
+    public static final ErrorCode FAILED_TO_PREPARE_RESPONSE = new ErrorCode(108, "Failed to prepare response for api: {}");
+    public static final ErrorCode FAILED_TO_COMPLETE_FUTURE = new ErrorCode(109, "Failed completion of Completable Future during execution of : {}");
+
 }

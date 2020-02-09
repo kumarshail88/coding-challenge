@@ -3,6 +3,7 @@ import static io.bankbridge.util.BanksApiConstants.*;
 import static spark.Spark.*;
 
 import io.bankbridge.config.BanksCacheInitializer;
+import io.bankbridge.config.BanksRemoteInitializer;
 import io.bankbridge.config.ConfigurationLoader;
 import io.bankbridge.exception.ExceptionHandler;
 import io.bankbridge.handler.BanksCacheBased;
@@ -33,11 +34,17 @@ public class Main {
 		port(config.getServerPort());
 
 		//Automatically initializes cache.
+		//This could be invoked lazily as when required first time.
 		BanksCacheInitializer.getInstance();
-		BanksRemoteCalls.init();
+
+		//Automatically initializes with remote api urls.
+		//This could be invoked lazily as when required first time.
+		BanksRemoteInitializer.getInstance();
 		
 		get(BANKS_API_URL_V1, (request, response) -> BanksCacheBased.handle(request, response));
 		get(BANKS_API_URL_V2, (request, response) -> BanksRemoteCalls.handle(request, response));
+
+		//Centralized API exception handling.
 		exception(RuntimeException.class, (ex, request, response) -> ExceptionHandler.handle(ex, request, response));
 
 	}

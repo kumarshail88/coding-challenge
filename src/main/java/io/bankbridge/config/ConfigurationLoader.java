@@ -13,13 +13,17 @@ import static io.bankbridge.util.BanksApiUtil.readResource;
 
 
 /**
- * This class loads application.properties config.
+ * This class loads application.properties config. This class takes care of its instance
+ * creation as well as initialization with config parameters.
+ * As soon as the instance is requested, client is provided a fully initialized instance.
  */
 @Slf4j
 public class ConfigurationLoader {
 
     private Properties config;
 
+    // An instance of ConfigurationLoader is useful only when it fully initialized.
+    // Client does not have to explicitly initialize.
     private ConfigurationLoader() {
         loadConfiguration();
     }
@@ -50,6 +54,10 @@ public class ConfigurationLoader {
 
     public String getBanksV2JsonPath(){
         return String.valueOf(config.get(BANKS_V2_JOSN_PATH));
+    }
+
+    public int getThreadPoolSize(){
+        return Integer.valueOf((String)config.get(THREAD_POOL_SIZE));
     }
 
     private static class ConfigurationProvider {

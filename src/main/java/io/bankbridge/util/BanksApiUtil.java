@@ -29,7 +29,7 @@ public class BanksApiUtil {
         try {
             return Optional.ofNullable(getObjectMapper().readValue(Thread.currentThread().getContextClassLoader().getResource(path), tClass));
         } catch (Exception e) {
-            log.error(formErrorMessageWithParameters(FAILED_TO_READ_FILE.getMessage(), path));
+            log.error(formErrorMessageWithParameters(FAILED_TO_READ_FILE.getMessage(), path), e);
             return Optional.empty();
         }
     }

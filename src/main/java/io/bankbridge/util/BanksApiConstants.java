@@ -14,4 +14,6 @@ public class BanksApiConstants {
     public static final String BANKS_API_URL_V2 = "/v2/banks/all";
     public static final String ID = "id";
     public static final String NAME = "name";
+    public static final String THREAD_POOL_SIZE = "threadPoolSize";
+    public static final int REMOTE_SERVER_PORT_NUMER = 1234;
 }
